@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event Management</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+.event{
+border:1px solid gray;
+padding:15px;
+margin:10px;
+}
+
+.details{
+display:none;
+}
+
+.highlight{
+background-color:#f0f8ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Upcoming Events</h2>
+
+<div class="event">
+
+<h3>AI Workshop</h3>
+<p>Date: April 10</p>
+
+<button class="toggle">Show Details</button>
+
+<div class="details">
+<p>This workshop introduces Artificial Intelligence concepts.</p>
+<button class="register">Register</button>
+</div>
+
+</div>
+
+<div class="event">
+
+<h3>Web Development Seminar</h3>
+<p>Date: April 15</p>
+
+<button class="toggle">Show Details</button>
+
+<div class="details">
+<p>Learn modern HTML, CSS, and JavaScript.</p>
+<button class="register">Register</button>
+</div>
+
+</div>
+
+<div class="event">
+
+<h3>Cyber Security Conference</h3>
+<p>Date: April 20</p>
+
+<button class="toggle">Show Details</button>
+
+<div class="details">
+<p>Understand security threats and protection methods.</p>
+<button class="register">Register</button>
+</div>
+
+</div>
+
+<script>
+
+$(".toggle").click(function(){
+
+let eventDiv=$(this).closest(".event")
+
+eventDiv.find(".details").slideToggle()
+
+let title=eventDiv.find("h3").text()
+
+alert("Event: "+title)
+
+eventDiv.toggleClass("highlight")
+
+if($(this).text()=="Show Details"){
+$(this).text("Hide Details")
+}else{
+$(this).text("Show Details")
+}
+
+})
+
+$(".register").click(function(){
+
+let eventTitle=$(this).closest(".event").find("h3").text()
+
+window.location.href="registration.html?event="+encodeURIComponent(eventTitle)
+
+})
+
+</script>
+
+</body>
+</html>

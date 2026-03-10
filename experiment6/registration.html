@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Event Registration</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+.error{
+color:red;
+}
+
+.success{
+color:green;
+}
+
+input{
+display:block;
+margin:8px;
+padding:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Event Registration</h2>
+
+Name:
+<input type="text" id="name">
+
+Email:
+<input type="text" id="email">
+
+Event Name:
+<input type="text" id="event" readonly>
+
+Mobile Number:
+<input type="text" id="mobile">
+
+<button id="submit">Submit</button>
+<button id="reset">Reset</button>
+
+<p id="message"></p>
+
+<script>
+
+const params=new URLSearchParams(window.location.search)
+$("#event").val(params.get("event"))
+
+$("#submit").click(function(){
+
+let name=$("#name").val()
+let email=$("#email").val()
+let mobile=$("#mobile").val()
+
+let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+let mobilePattern=/^[0-9]{10,}$/
+
+$("#message").text("")
+
+$("input").css("border","1px solid gray")
+
+if(name=="" || email=="" || mobile==""){
+$("#message").text("All fields are required").addClass("error")
+$("input").css("border","2px solid red")
+return
+}
+
+if(!emailPattern.test(email)){
+$("#message").text("Invalid Email").addClass("error")
+$("#email").css("border","2px solid red")
+return
+}
+
+if(!mobilePattern.test(mobile)){
+$("#message").text("Mobile must contain at least 10 digits").addClass("error")
+$("#mobile").css("border","2px solid red")
+return
+}
+
+$("#message").removeClass("error")
+$("#message").addClass("success")
+$("#message").text("Registration Successful for "+name)
+
+$("#submit").prop("disabled",true).text("Registered")
+
+})
+
+$("#reset").click(function(){
+
+$("input").val("")
+$("#message").text("")
+$("input").css("border","1px solid gray")
+$("#submit").prop("disabled",false).text("Submit")
+
+})
+
+</script>
+
+</body>
+</html>
