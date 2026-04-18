@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App with Timer</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        .question {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        #timer {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+        }
+
+        #warning {
+            color: orange;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>JavaScript Quiz (10 Seconds)</h2>
+    
+    <p>Time Remaining: <span id="timer">10</span> seconds</p>
+    <p id="warning"></p>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <p>1. What is the capital of France?</p>
+            <input type="radio" name="q1" value="a"> London<br>
+            <input type="radio" name="q1" value="b"> Paris<br>
+            <input type="radio" name="q1" value="c"> Rome<br>
+        </div>
+
+        <div class="question">
+            <p>2. Which language runs in browser?</p>
+            <input type="radio" name="q2" value="a"> Java<br>
+            <input type="radio" name="q2" value="b"> C++<br>
+            <input type="radio" name="q2" value="c"> JavaScript<br>
+        </div>
+
+        <div class="question">
+            <p>3. What does HTML stand for?</p>
+            <input type="radio" name="q3" value="a"> Hyper Text Markup Language<br>
+            <input type="radio" name="q3" value="b"> High Text Machine Language<br>
+            <input type="radio" name="q3" value="c"> Hyper Tool Multi Language<br>
+        </div>
+
+        <div class="question">
+            <p>4. Which company developed JavaScript?</p>
+            <input type="radio" name="q4" value="a"> Netscape<br>
+            <input type="radio" name="q4" value="b"> Microsoft<br>
+            <input type="radio" name="q4" value="c"> Google<br>
+        </div>
+
+        <div class="question">
+            <p>5. Which symbol is used for comments in JS?</p>
+            <input type="radio" name="q5" value="a"> // <br>
+            <input type="radio" name="q5" value="b"> ## <br>
+            <input type="radio" name="q5" value="c"> <!-- --> <br>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit</button>
+
+    </form>
+
+    <h3 id="result"></h3>
+
+</div>
+
+<script>
+
+let timeLeft = 10;
+let timerDisplay = document.getElementById("timer");
+let warning = document.getElementById("warning");
+
+let timer = setInterval(function() {
+
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
+
+    if (timeLeft === 5) {
+        warning.textContent = "Only 5 seconds remaining!";
+    }
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        submitQuiz();
+    }
+
+}, 1000);
+
+
+function submitQuiz() {
+
+    clearInterval(timer);
+
+    let score = 0;
+
+    const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "a",
+        q4: "a",
+        q5: "a"
+    };
+
+    for (let key in answers) {
+        let selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+            score++;
+        }
+    }
+
+    document.getElementById("result").textContent =
+        "Your Final Score: " + score + " / 5";
+
+    // Disable all inputs
+    let inputs = document.querySelectorAll("input");
+    inputs.forEach(input => input.disabled = true);
+}
+
+</script>
+
+</body>
+</html>
