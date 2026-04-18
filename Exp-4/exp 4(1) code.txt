@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Project 2</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 { text-align: center; color: #1e293b; }
+        .input-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus { border-color: #2563eb; }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            background: #f8fafc;
+            min-height: 80px;
+        }
+        #bmi-value { font-size: 24px; font-weight: bold; color: #2563eb; }
+        #bmi-status { font-size: 18px; margin-top: 5px; font-weight: 500; }
+        
+        /* Dynamic Colors for Status */
+        .status-underweight { color: #0ea5e9; }
+        .status-normal { color: #10b981; }
+        .status-overweight { color: #f59e0b; }
+        .status-obese { color: #ef4444; }
+    </style>
+</head>
+<body>
+
+<div class="calculator-card">
+    <h2>BMI Calculator</h2>
+    
+    <div class="input-group">
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="e.g. 70" onkeyup="calculateBMI()">
+    </div>
+
+    <div class="input-group">
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" placeholder="e.g. 175" onkeyup="calculateBMI()">
+    </div>
+
+    <div class="result-box">
+        <div id="bmi-value">--</div>
+        <div id="bmi-status">Enter your details</div>
+    </div>
+</div>
+
+<script>
+    function calculateBMI() {
+        // Get values from inputs
+        const weight = parseFloat(document.getElementById('weight').value);
+        const heightCm = parseFloat(document.getElementById('height').value);
+        
+        const valueDisplay = document.getElementById('bmi-value');
+        const statusDisplay = document.getElementById('bmi-status');
+
+        // Validate inputs
+        if (weight > 0 && heightCm > 0) {
+            // BMI Formula: weight(kg) / [height(m)]^2
+            const heightM = heightCm / 100;
+            const bmi = (weight / (heightM * heightM)).toFixed(1);
+
+            // Display BMI Value
+            valueDisplay.innerHTML = bmi;
+
+            // Determine Body Type based on criteria
+            let status = "";
+            let colorClass = "";
+
+            if (bmi < 18) {
+                status = "Underweight";
+                colorClass = "status-underweight";
+            } else if (bmi >= 18 && bmi <= 25) {
+                status = "Normal Weight";
+                colorClass = "status-normal";
+            } else if (bmi > 25 && bmi <= 30) {
+                status = "Overweight";
+                colorClass = "status-overweight";
+            } else {
+                status = "Obese";
+                colorClass = "status-obese";
+            }
+
+            // Apply Status and Color
+            statusDisplay.innerHTML = status;
+            statusDisplay.className = colorClass;
+
+        } else {
+            // Reset if inputs are empty or invalid
+            valueDisplay.innerHTML = "--";
+            statusDisplay.innerHTML = "Enter valid numbers";
+            statusDisplay.className = "";
+        }
+    }
+</script>
+
+</body>
+</html>
