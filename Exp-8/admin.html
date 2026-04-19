@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Search</title>
+</head>
+<body>
+
+<h2>Search Registration</h2>
+
+<input type="text" id="regno" placeholder="Enter Register Number">
+<button onclick="search()">Search</button>
+
+<p id="result"></p>
+
+<script>
+async function search() {
+    const regno = document.getElementById("regno").value;
+
+    const res = await fetch(`http://localhost:3000/search/${regno}`);
+    
+    if (res.headers.get("content-type").includes("application/json")) {
+        const data = await res.json();
+        document.getElementById("result").innerHTML =
+            `Reg No: ${data.regno}<br>
+             Name: ${data.name}<br>
+             Events: ${data.events}`;
+    } else {
+        const msg = await res.text();
+        document.getElementById("result").innerText = msg;
+    }
+}
+</script>
+
+</body>
+</html>

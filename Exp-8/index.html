@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+</head>
+<body>
+
+<h2>Event Registration</h2>
+
+<form id="form">
+    Register No: <input type="text" id="regno" required><br><br>
+    Name: <input type="text" id="name" required><br><br>
+
+    <h3>Select Events (Max 3)</h3>
+
+    <input type="checkbox" value="Coding Challenge"> Coding Challenge<br>
+    <input type="checkbox" value="Debugging Contest"> Debugging Contest<br>
+    <input type="checkbox" value="Web Design"> Web Design<br>
+    <input type="checkbox" value="Quiz Competition"> Quiz Competition<br>
+    <input type="checkbox" value="Paper Presentation"> Paper Presentation<br><br>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const regno = document.getElementById("regno").value;
+    const name = document.getElementById("name").value;
+
+    const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+    const events = Array.from(checkboxes).map(cb => cb.value);
+
+    if (events.length > 3) {
+        alert("Select maximum 3 events!");
+        return;
+    }
+
+    const res = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ regno, name, events })
+    });
+
+    const msg = await res.text();
+    alert(msg);
+});
+</script>
+
+</body>
+</html>
