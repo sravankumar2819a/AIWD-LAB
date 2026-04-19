@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Web Design</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">AI Website</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero text-center text-white">
+    <div class="container">
+        <h1 class="display-4">AI Powered Website</h1>
+        <p class="lead">Built using ChatGPT & AI Tools</p>
+        <button class="btn btn-warning" onclick="showMsg()">Try AI</button>
+    </div>
+</section>
+
+<!-- About -->
+<section class="container text-center my-5">
+    <h2>About</h2>
+    <p>AI helps developers create websites faster with better design and productivity.</p>
+</section>
+
+<!-- Features -->
+<section class="bg-light py-5">
+    <div class="container text-center">
+        <h2>Features</h2>
+        <div class="row mt-4">
+
+            <div class="col-md-3">
+                <div class="card p-3 shadow">
+                    <h5>⚡ Fast</h5>
+                    <p>Quick development using AI</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 shadow">
+                    <h5>🎨 Modern UI</h5>
+                    <p>Clean and responsive design</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 shadow">
+                    <h5>🤖 AI Powered</h5>
+                    <p>Generated using AI tools</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 shadow">
+                    <h5>📱 Responsive</h5>
+                    <p>Works on all devices</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="container text-center my-5">
+    <h2>Contact</h2>
+    <form class="mt-4" onsubmit="submitForm(event)">
+        <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+        <input type="email" class="form-control mb-3" placeholder="Your Email" required>
+        <textarea class="form-control mb-3" placeholder="Message"></textarea>
+        <button class="btn btn-primary">Send Message</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center p-3">
+    © 2026 AI Website | Designed using AI
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

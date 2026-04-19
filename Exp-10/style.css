@@ -1,0 +1,24 @@
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    padding: 100px 0;
+}
+
+/* Cards Hover Effect */
+.card {
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Button Hover */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Smooth font */
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
