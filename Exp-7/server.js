@@ -1,21 +1,22 @@
-// Import the built-in HTTP module
+// Import HTTP module
 const http = require('http');
 
-// Define hostname and port
-const hostname = '127.0.0.1';
-const port = 3000;
-
-// Create the server
+// Create server
 const server = http.createServer((req, res) => {
-    // Set response header
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
+    const name = "Sravan Kumar Reddy"; // replace with your name
+    const currentTime = new Date();
 
-    // Send greeting message
-    res.end('Hello! Welcome to my Node.js server 🚀');
+    // Set response header
+    res.writeHead(200, { "Content-Type": "text/html" });
+
+    // Send response
+    res.write(`<h2>Hello from ${name}'s Node.js Server</h2>`);
+    res.write(`<p>Current Date and Time: ${currentTime}</p>`);
+
+    res.end();
 });
 
-// Start the server
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+// Start server
+server.listen(3000, "0.0.0.0", () => {
+    console.log("Server running at http://localhost:3000");
 });
